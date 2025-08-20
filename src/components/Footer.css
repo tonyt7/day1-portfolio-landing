@@ -1,0 +1,54 @@
+
+/* Theme tokens */
+:root[data-theme="light"] {
+  --footer-bg: color-mix(in oklab, #f1edee 92%, black 8%);
+  /* fallback for older browsers */
+  --footer-bg-fallback: #e3e0e1;
+  --footer-txt: #000;
+  --footer-name: #000;
+}
+body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif; }
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem 1rem; /* taller footer */
+  background: var(--footer-bg, #0a0a23);
+  color: var(--txt, #fff);
+}
+
+.footer-name {
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: 700;
+  color: var(--cyan, #00ffd5); /* neon glow in dark theme */
+  }
+
+.footer-caption {
+  margin: 0.75rem 0 1.2rem;
+  font-size: 1rem;
+  color: var(--txt, #ccc);
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+  }
+
+.footer-links a {
+  color: var(--txt, #fff);
+  font-size: 1.6rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--cyan, #00ffd5);
+  transform: scale(1.15);
+}
+
+.footer-year {
+  font-size: 0.85rem;
+  color: var(--txt, #aaa);
+}

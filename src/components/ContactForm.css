@@ -1,0 +1,161 @@
+/* ===== THEME TOKENS =====
+   Assumes <html data-theme="dark"> or "light". 
+   You can also scope these under a wrapper if you prefer.
+*/
+:root {
+  --surface: #ffffff;
+  --surface-2: #f6f7fb;
+  --text: #0a0a0a;
+  --text-muted: #555;
+  --border: #dcdfe6;
+  --focus: #1c1c3c;            /* dark base */
+  --accent: #1c1c3c;           /* neon teal */
+  --accent-2: #0a0a23 ;         /* neon blue */
+  --shadow: 0 8px 28px rgba(0,0,0,.08);
+}
+
+html[data-theme="dark"] {
+  --surface: #0a0a23;          /* dark base (your neon theme) */
+  --surface-2: #1c1c3c;
+  --text: #e9eef9;
+  --text-muted: #b8c0d9;
+  --border: #2a2a55;
+  --focus: #00bfff;            /* visible focus ring on dark */
+  --accent: #00ffd5;           /* neon teal */
+  --accent-2: #00bfff;         /* pink accent option if needed */
+  --shadow: 0 10px 34px rgba(0,0,0,.35);
+}
+
+/* ===== LAYOUT ===== */
+.contact-section {
+  padding: clamp(2rem, 4vw, 3.5rem) 1.25rem;
+  max-width: 960px;
+  margin: 0 auto;
+  color: var(--text);
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.contact-title {
+  margin: 0 0 .5rem 0;
+  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+  letter-spacing: .3px;
+  /* neon heading color on dark, black on light */
+  color: var(--accent);
+}
+
+html[data-theme="light"] .contact-title {
+  color: #000;
+}
+
+.contact-intro {
+  margin: 0 auto;
+  max-width: 62ch;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ===== FORM ===== */
+.contact-form {
+  margin-top: 1.25rem;
+  background: linear-gradient(0deg, var(--surface-2), var(--surface-2));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  box-shadow: var(--shadow);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 700px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: .45rem;
+  margin-top:.45rem;
+  margin-left:.45rem;
+  font-weight: 600;
+}
+
+input, textarea {
+  width: 100%;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom:.5rem;
+  padding: .85rem 1rem;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: color-mix(in oklab, var(--text-muted) 70%, var(--text) 30%);
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--focus) 30%, transparent);
+}
+
+/* ===== BUTTON ===== */
+.btn-submit {
+  margin-top: .25rem;
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: .95rem 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  color: #fff; /* strong contrast for neon */
+  transition: transform .06s ease, filter .2s ease;
+}
+
+html[data-theme="dark"] .btn-submit { color: #0a0a0a; } /* still readable */
+
+.btn-submit:hover { filter: brightness(1.05); }
+.btn-submit:active { transform: translateY(1px); }
+
+/* ===== STATUS TEXT ===== */
+.form-status {
+  margin-top: .75rem;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity .2s ease, transform .2s ease;
+  font-weight: 600;
+}
+
+.form-status.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.form-status.success { color: var(--accent-2); }
+.form-status.error { color: #f44336; }
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  .btn-submit,
+  .form-status {
+    transition: none;
+  }
+}

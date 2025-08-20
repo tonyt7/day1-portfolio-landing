@@ -1,0 +1,145 @@
+/* ------------------------------------------------------------------
+   Theme tokens
+   - Works with data-theme="dark" or "light" on <html> or a wrapper
+   - Also respects prefers-color-scheme if you don't set data-theme
+------------------------------------------------------------------- */
+
+:root {
+  --sc-bg: #ffffff;
+  --sc-text: #0a0a23;
+  --sc-accent: #0b7cff;              /* light accent */
+  --sc-accent-glow: rgba(11, 124, 255, 0.35);
+  --sc-chip-bg: rgba(240, 241, 244, 0.8);
+  --sc-chip-border: rgba(11, 124, 255, 0.25);
+  --sc-chip-text: #0a0a23;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sc-bg: #0a0a23;
+    --sc-text: #e6f7ff;
+    --sc-accent: #00ffd5;            /* neon accent */
+    --sc-accent-glow: rgba(0, 255, 213, 0.45);
+    --sc-chip-bg: rgba(10, 10, 35, 0.6);
+    --sc-chip-border: rgba(0, 255, 213, 0.25);
+    --sc-chip-text: #e6f7ff;
+  }
+}
+
+/* Explicit theme override using data-theme attribute */
+[data-theme="light"] {
+  --sc-bg: #ffffff;
+  --sc-text: #0a0a23;
+  --sc-accent: #0b7cff;
+  --sc-accent-glow: rgba(11, 124, 255, 0.35);
+  --sc-chip-bg: rgba(240, 241, 244, 0.8);
+  --sc-chip-border: rgba(11, 124, 255, 0.25);
+  --sc-chip-text: #0a0a23;
+}
+[data-theme="dark"] {
+  --sc-bg: #0a0a23;
+  --sc-text: #e6f7ff;
+  --sc-accent: #00ffd5;
+  --sc-accent-glow: rgba(0, 255, 213, 0.45);
+  --sc-chip-bg: rgba(10, 10, 35, 0.6);
+  --sc-chip-border: rgba(0, 255, 213, 0.25);
+  --sc-chip-text: #e6f7ff;
+}
+
+/* ------------------------------------------------------------------
+   Structure & animation
+------------------------------------------------------------------- */
+
+.skill-carousel {
+  width: 100%;
+  padding: 0.75rem 0;
+  background: transparent;
+  color: var(--sc-text);
+}
+
+.skill-carousel__title {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sc-accent);
+  text-shadow: 0 0 8px var(--sc-accent-glow);
+}
+
+.skill-carousel__viewport {
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-carousel__track {
+  display: flex;
+  align-items: stretch;
+  gap: 1.25rem;
+  padding: 0.25rem 0;
+  width: max-content;
+  animation-name: sc-slide-linear;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  /* animation-duration provided inline from the component (speedSeconds) */
+}
+
+/* Pause when hovered or when an item is focused (keyboard accessible) */
+.skill-carousel__viewport:hover .skill-carousel__track,
+.skill-carousel__viewport:focus-within .skill-carousel__track {
+  animation-play-state: paused;
+}
+
+@keyframes sc-slide-linear {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* because we duplicate the list */
+}
+
+.skill-item {
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  user-select: none;
+
+  background: var(--sc-chip-bg);
+  border: 1px solid var(--sc-chip-border);
+  color: var(--sc-chip-text);
+  box-shadow:
+    0 0 12px rgba(0, 0, 0, 0.08),
+    inset 0 0 18px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(2px);
+}
+
+.skill-item:focus {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--sc-accent),
+    0 0 20px var(--sc-accent-glow);
+}
+
+.skill-item__icon {
+  font-size: 1.4rem;
+  filter: drop-shadow(0 0 6px var(--sc-accent-glow));
+}
+
+.skill-item__img {
+  display: block;
+  max-height: 2.25rem;
+  width: auto;
+}
+
+.skill-item__label {
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .skill-carousel__track {
+    animation: none;
+  }
+}

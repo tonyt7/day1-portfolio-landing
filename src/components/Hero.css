@@ -1,0 +1,276 @@
+/* Global Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background-color:var(--bg-solid);
+  color: white;
+}
+
+/* 1) Global safety */
+html, body { height: 100%; overflow-x: hidden; }
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background-color: transparent;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 999;
+}
+
+///////////////////////////////////////
+/* ===============  Theme tokens  =============== */
+:root {
+  --bg: #0b1220;
+  --text: #e9eef7;
+  --muted: #a7b0c0;
+  --accent: #ff6b5a;     /* coral/orange like the mock */
+  --card: #0f1a2e;
+  --shadow: rgba(0,0,0,.5);
+}
+
+body.light-theme {
+  --bg: #ffffff;
+  --text: #0a0a0a;
+  --muted: #4a5568;
+  --accent: #ff6b5a;
+  --card: #f5f7fb;
+  --shadow: rgba(0,0,0,.08);
+}
+
+/* ===============  Layout  =============== */
+/* Theme tokens driven by data-theme */
+/* DARK */
+:root[data-theme="dark"]{
+  --bg-solid: #0A1B2B; /* base navy that matches the avatar */
+  --bg-glow: radial-gradient(
+      circle at 78% 35%,
+      rgba(0,255,213,.10) 0%,
+      rgba(0,255,213,.30) 25%,
+      transparent 42%
+  );
+  --text-color: #E9EEF7;
+  --accent-color: #00FFD5;
+  --button-bg: var(--accent-color);
+  --button-text: #001314;
+}
+
+:root[data-theme="light"] {
+  --bg-solid: #f1edee; /* light beige/white */
+  --bg-glow: radial-gradient(
+      circle at 78% 35%,
+      rgba(0, 0, 0, 0.12) 0%,   /* soft black glow */
+      rgba(0,0,0,.18) 22%,
+      transparent 42%
+  );
+  --text-color: #000000;
+  --accent-color: #000000;
+  --button-bg: var(--accent-color);
+  --button-text: #ffffff;
+}
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 5%;
+  background-image: var(--bg-glow);
+  color:var(--text-color); isolation:isolate; 
+  }
+
+.hero-left {
+  flex: 1;
+}
+
+.hero-left h1 {
+  font-size: 3rem;
+  color: var(--accent-color);
+  font-family: 'Poppins', sans-serif; /* Clean, bold UI font */
+  font-weight: 700;
+}
+
+.hero-left h1 span {
+  color: var(--accent-color);
+}
+
+.hero-left h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.hero-button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px var(--accent-color), 0 0 30px var(--accent-color);
+}
+
+/* --- Circular avatar that blends into the background --- */
+
+/* Color tokens for the glow */
+:root[data-theme="dark"]{
+  --avatar-halo-1: rgba(0,255,213,.30); /* teal */
+  --avatar-halo-2: rgba(0,255,213,.14);
+  --avatar-ring:   rgba(0,255,213,.35);
+  --avatar-shadow: rgba(0,0,0,.45);
+}
+:root[data-theme="light"]{
+  --avatar-halo-1: rgba(0,0,0,.18);     /* gray/black */
+  --avatar-halo-2: rgba(0,0,0,.08);
+  --avatar-ring:   rgba(0,0,0,.12);
+  --avatar-shadow: rgba(0,0,0,.06);
+}
+
+/* keep right side the same */
+.hero-right{ flex:1; display:flex; justify-content:center; }
+
+/* circular wrapper */
+.avatar-container{
+  position: relative;
+  width: min(440px, 42vw);
+  height: min(600px);
+  aspect-ratio: 1 / 0.9;                 /* perfect circle */
+  border-radius: 9999px;
+  overflow: hidden;                     /* clip the inner glow to the circle */
+  display: grid;
+  place-items: center;
+  box-shadow: 0 22px 60px var(--avatar-shadow);
+  isolation: isolate;                   /* keep blends local */
+}
+
+/* images (theme swap still works) */
+.avatar{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  z-index: 1;
+}
+.light-img{ display:none; }
+:root[data-theme="light"] .dark-img{ display:none; }
+:root[data-theme="light"] .light-img{ display:block; }
+
+/* OUTER halo that bleeds into the page */
+.avatar-container::before{
+  content:"";
+  position:absolute;
+  inset:-18%;                           /* expand to spill out */
+  border-radius: inherit;
+  z-index: 0;
+  background: radial-gradient(
+    circle at 55% 40%,
+    var(--avatar-halo-1) 0%,
+    var(--avatar-halo-2) 36%,
+    transparent 72%
+  );
+  filter: blur(28px);
+  mix-blend-mode: screen;               /* brightens on dark */
+  pointer-events: none;
+}
+:root[data-theme="light"] .avatar-container::before{
+  mix-blend-mode: multiply;             /* sinks into light bg */
+  filter: blur(24px);
+}
+
+/* INNER glow + subtle rim on top of the image */
+.avatar-container::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: inherit;
+  z-index: 2;                           /* above the img */
+  /* inner glow */
+  box-shadow:
+    inset 0 20px 100px var(--avatar-halo-1),
+    inset 0 20px 20px var(--avatar-halo-2);
+  /* soft ring near the edge so the circle feels elevated */
+  background:
+    radial-gradient(closest-side,
+      transparent 80%,
+      var(--avatar-ring) 73%,
+      transparent 80%);
+  mix-blend-mode: screen;               /* pop on dark */
+  pointer-events: none;
+}
+:root[data-theme="light"] .avatar-container::after{
+  mix-blend-mode: multiply;             /* subtle on light */
+}
+
+
+.light-img {
+  display: none;
+}
+
+:root[data-theme="light"] .dark-img {
+  display: none;
+}
+
+:root[data-theme="light"] .light-img {
+  display: block;
+}
+
+/* Mobile layout: stack, image first */
+@media (max-width: 720px) {
+  .hero {
+    flex-direction: column;        /* stack */
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+    overflow-x: clip;              /* prevent halo overflow scroll */
+  }
+
+  /* Put the image container on top */
+  .hero-right { order: -1; width: 100%; display: flex; justify-content: center; }
+
+  /* Make the avatar responsive */
+  .avatar-container {
+    width: min(86vw, 420px);       /* scale nicely on phones */
+    aspect-ratio: 1 / 1;
+  }
+
+  /* Text block below, centered (change to left if you prefer) */
+  .hero-left {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-left h1 { 
+    font-size: clamp(2rem, 8vw, 2.6rem);
+  }
+  .hero-left h2 {
+    font-size: clamp(1.05rem, 4.5vw, 1.25rem);
+    margin-bottom: 1rem;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: .75rem;
+  }
+
+  .hero-button {
+    width: min(260px, 80vw);
+  }
+}

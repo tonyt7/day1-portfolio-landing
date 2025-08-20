@@ -1,0 +1,319 @@
+:root{
+  /* theme palette like your site */
+  --bg1:#0a0a23; --bg2:#0a0a23;
+  --txt:#f5f7ff; --muted:#c9d2ffcc;
+  --cyan:#00ffd5; --pink:#f72585;
+  --head: #00ffd5;
+  /* layout controls */
+  --columns: 3;
+  --radius: .55;
+  --mapHeight: 3.9rem;
+  --mapWidth: min(96vw, 1400px);
+  --lineWidth: .28rem;
+
+  /* line + glass defaults (dark) */
+  --barGradient: linear-gradient(90deg, rgba(0,255,213,.85), rgba(247,37,133,.55));
+  --lineColor: rgba(0,255,213,.45);
+
+  --glassBg: rgba(255,255,255,.08);
+  --glassBr: rgba(255,255,255,.18);
+
+  /* extra padding between curve and cards */
+  --cardGap: .65rem;
+  --gutter: 0px;
+
+  --card-h3: clamp(1.0rem, 1.4vw + .6rem, 1.5rem);
+  --card-body: clamp(.90rem, .9vw + .45rem, 1.05rem);
+  --card-badge: clamp(.78rem, .6vw + .36rem, .9rem);
+  --card-pad: clamp(12px, 1.4vw, 20px);
+  --card-gap: clamp(8px, 1vw, 14px);
+}
+
+:root[data-theme="light"]{
+  --bg1:#fff; --bg2:#f6f7fb; --txt:#0e1020; --muted:#3a3f5ecc;
+  /* black/grey curve for light theme */
+  --barGradient: linear-gradient(90deg, #111 0%, #999 100%);
+  --lineColor: rgba(0,0,0,.35);
+  --glassBg:#fff; --glassBr: rgba(10,16,32,.12);
+}
+
+
+.mapWrapNeon{
+  display:grid; place-items:center;
+  width:100%;
+  color: var(--txt);
+  padding: clamp(18px, 3vw, 32px);
+}
+
+.jnm-title{
+  
+  margin: 0 0 .6rem;
+  font-size: clamp(1.75rem,3.5vw,2.25rem);
+  color: var(--head);
+
+}
+
+/* ===== Timeline rows ===== */
+.jnm{ position:relative; width: var(--mapWidth); margin: 0 auto; }
+
+.jnm .row{
+  position:relative;
+  width:100%;
+  height: calc(var(--mapHeight) * 2);
+  margin-bottom: .5rem;
+}
+
+/* clickable segment (acts like button) */
+.jnm .itemBar{
+  position: relative;
+  display: inline-block;
+  width: calc(100% / var(--columns));
+  height: var(--lineWidth);
+  margin-top: calc(var(--mapHeight) * 2 - var(--lineWidth) / 2);
+  background: var(--barGradient);
+  filter: drop-shadow(0 0 8px rgba(0,255,213,.45));
+  border-radius: 999px;
+  vertical-align: top;
+  border: 0;
+  cursor: pointer;
+}
+/* glass pill above the curve — with extra gap */
+.jnm .itemInfo{
+  position:relative; bottom:4rem;
+  display:inline-flex; gap:10px; justify-content:center; align-items:center;
+  border: 1px solid var(--glassBr);
+  padding: .55rem .75rem;
+  border-radius: .9rem;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 3px 10px var(--head);
+  color: var(--txt);
+  transition: box-shadow .2s ease;
+}
+[data-theme="light"] .jnm .itemInfo{
+background:#fff;
+}
+/* when the BUTTON is focused/pressed, style the child */
+.jnm .itemBar:focus-visible .itemInfo,
+.jnm .itemBar:focus .itemInfo,         /* fallback for browsers */
+.jnm .itemBar:active .itemInfo {
+  box-shadow: 0 4px 20px var(--text);
+  backdrop-filter: blur(6px);
+}
+
+/* persistent 'selected' look via your existing isActive class */
+.jnm .itemBar.active .itemInfo {
+  box-shadow: 0 4px 20px var(--text);
+  border: 2px var(--cyan)
+}
+.jnm .pill-year{
+  padding:.18rem .55rem; border-radius:999px;
+  border:1px solid var(--head); color:var(--head);
+  font-size:.85rem; font-weight:800;
+}
+.jnm .pill-title{
+  font-weight:700; font-size: clamp(.95rem, 1.5vw, 1.05rem);
+  white-space: nowrap;
+}
+
+/* small flourish under card */
+.jnm .itemInfo::after{
+  content:"";
+  position:absolute; left:50%; transform:translateX(-50%);
+  bottom: calc(-1 * var(--lineWidth));
+  width: calc(var(--lineWidth) * 2);
+  height: var(--lineWidth);
+  background: var(--lineColor);
+  border-radius: 3em 3em 0 0;
+  transition: width .2s ease, height .2s ease;
+}
+.jnm .itemBar:hover .itemInfo::after{
+  width: calc(var(--lineWidth) * 10);
+  height: var(--lineWidth);
+}
+
+/* dot/number under line */
+.jnm .itemDate{
+  position:absolute; inset: auto 0 0 0;
+  transform: translateY(calc(var(--lineWidth) + .25rem));
+  display:grid; place-items:center;
+}
+.jnm .dot{
+  width:2.1rem; height:2.1rem; border-radius:50%;
+  display:grid; place-items:center; font-weight:900; color:var(--bg1);
+  background:var(--barGradient);
+  }
+
+/* side arcs to make the “S” */
+.jnm .row:nth-child(2n) .itemBar:first-child::after{
+  content:""; position:absolute; right:100%; top:0;
+  width: calc(var(--mapHeight) * var(--radius));
+  height: calc(var(--mapHeight) * 2 - var(--lineWidth));
+  border-radius: calc(var(--mapHeight) * 2) 0 0 calc(var(--mapHeight) * 2);
+  border: var(--lineWidth) solid var(--lineColor); border-right:none;
+  filter: drop-shadow(0 0 8px rgba(0,0,0,.15));
+  box-sizing: border-box;
+  top: calc(0 * var(--lineWidth));
+  height: calc(var(--mapHeight) * 2.15 + var(--lineWidth));
+  border-width: var(--lineWidth);
+}
+.jnm .row:nth-child(2n + 1) .itemBar:last-child::after{
+  content:""; position:absolute; left:100%; top:0;
+  width: calc(var(--mapHeight) * var(--radius));
+  height: calc(var(--mapHeight) * 2 - var(--lineWidth));
+  border-radius: 0 calc(var(--mapHeight) * 2) calc(var(--mapHeight) * 2) 0;
+  border: var(--lineWidth) solid var(--lineColor); border-left:none;
+  filter: drop-shadow(0 0 8px rgba(0,0,0,.15));
+  box-sizing: border-box;
+  top: calc(0 * var(--lineWidth));
+  height: calc(var(--mapHeight) * 2.15 + var(--lineWidth));
+  border-width: var(--lineWidth);
+}
+.jnm .row:last-child .itemBar::after{ display:none; }
+
+/* ===== Carousel ===== */
+.jnm-carousel{
+  position:relative;
+  width: var(--mapWidth);
+  margin: clamp(10px, 4.2vw, 5rem) auto 0;
+  display:grid; grid-template-columns: auto 1fr auto;
+  align-items:center; gap:8px;
+}
+.nav{
+  width:42px; height:42px; border-radius:50%;
+  border:1px solid var(--glassBr);
+  background: var(--glassBg);
+  color: var(--txt); cursor:pointer;
+}
+.nav:disabled{ opacity:.4; cursor:not-allowed; }
+
+.slides-window{ overflow:hidden; border-radius:12px; padding-inline: clamp(8px, 2vw, 16px); }
+.slides-track{
+  display:flex; width: calc(100% * 6); transition: transform .45s cubic-bezier(.22,.74,.25,.99);
+}
+/* ✅ Each slide takes exactly one viewport; no extra width from padding */
+.slide{
+  flex: 0 0 100%;
+  min-width: 100%;
+  padding: 0;               /* <-- IMPORTANT: remove padding from the slide */
+  box-sizing: border-box;
+  display: flex;
+  /* keep card centered */
+  align-items: stretch;
+}
+.slide-card{
+  border: 2px solid var(--head);
+  background: var(--glassBg);
+  width: 14%;
+  max-width: 45%;            /* keep some breathing room */
+ // margin: 0 auto;
+  overflow: hidden;   
+  box-sizing: border-box;
+  padding: var(--card-pad);
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+.slide-head{ color: var(--head);display: flex; align-items:center; gap: var(--card-gap);
+  margin-bottom: calc(var(--card-gap) * .8); }
+
+.slide-head h3{
+  flex: 1 1 auto;          /* allow to shrink */
+  min-width: 0;            /* CRUCIAL for flex text wrapping */
+  white-space: normal;
+  overflow-wrap: anywhere; /* modern */
+  word-break: break-word;           /* nicer breaks (supported in modern browsers) */
+}
+.badge{
+  border:1px solid var(--cyan); color:var(--cyan);
+  border-radius:999px; background: rgba(0,255,213,.08);
+font-size: var(--card-badge);
+  padding: .3em .7em;
+  white-space: nowrap;;
+}
+.muted{  font-size: var(--card-body);
+  line-height: 1.65;
+  overflow-wrap: anywhere;      /* never overflow */
+  hyphens: auto;
+  max-width: 70ch;
+
+}
+
+/* dots under carousel */
+.dotbar{ display:flex; gap:8px; justify-content:center; margin-top:10px; }
+.dotbar .dot{
+  width:10px; height:10px; border-radius:50%;
+  border:1px solid var(--cyan); background: transparent; cursor:pointer;
+}
+.dotbar .dot.on{ background: var(--cyan); }
+
+/* responsive */
+@media (max-width: 980px){
+  :root{ --mapHeight: 3.6rem; }
+  .jnm .pill-title{ font-size: .95rem; }
+}
+@media (max-width: 720px){
+  :root{ --columns: 3; --mapHeight: 3.4rem; }
+
+  .slide-head {
+    flex-direction: column;      /* stack them */
+    align-items: flex-start;     /* left align for readability */
+    gap: 0.25rem;
+  }
+
+  .slide-head h3 {
+    order: -1;                   /* make heading come first */
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+  }
+
+  .slide-head .badge {
+    order: 0;                    /* badge comes after heading */
+    font-size: clamp(0.8rem, 2vw, 1rem);
+  }
+
+  .slide-card p {
+    font-size: clamp(0.85rem, 2.2vw, 1rem);
+    line-height: 1.5;
+    word-wrap: break-word;       /* ensure wrapping */
+  }
+}
+@media (max-width: 620px){
+
+  .slide-head { gap: .6rem; }
+  .slide-card { padding: clamp(10px, 3vw, 14px); }
+  .slide-card .muted{ max-width: 65ch; }
+    .pill-year {
+    display: none;
+  }
+  .jnm .itemInfo {
+    display: none;
+    padding: .55rem .75rem;
+    border-radius: .9rem;
+    backdrop-filter:none;
+    box-shadow: 0 10px 24px rgba(44, 14, 14, 0.28);
+    }
+  .jnm-title {
+    margin: 0 auto;
+    font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+    color: var(--cyan);
+    text-shadow: 0 0 14px rgba(0, 255, 213, .35);
+}
+
+
+}
+@media (max-width: 1100px){
+  :root{ --gutter: clamp(14px, 4vw, 28px); }
+  .pill-title {
+    display: none;
+  }
+}
+
+/* give the whole timeline breathing room */
+.jnm{
+  width: var(--mapWidth);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+/* keep each row’s content away from the sides, too */
+.jnm .row{
+  padding-inline: var(--gutter);
+}
