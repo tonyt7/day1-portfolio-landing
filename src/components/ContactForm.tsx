@@ -1,8 +1,9 @@
 import React, { useState,useId } from "react";
 import "../components/ContactForm.css";
+
 const ContactForm: React.FC = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState<"idle"|"success"|"error">("idle");
+  const [formData, setFormData] = useState({ name: "", email: "", message: "", company: "" }); // +honeypot
+  const [status, setStatus] = useState<"idle"|"success"|"error"|"sending">("idle");
   const nameId = useId();
   const emailId = useId();
   const msgId = useId();
@@ -11,13 +12,26 @@ const ContactForm: React.FC = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setStatus("sending");
     try {
-      // TODO: wire to your backend or email service
-      console.log("Form submitted:", formData);
-      setStatus("success");
-      setFormData({ name: "", email: "", message: "" });
+      const r = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          company: formData.company, // honeypot
+        }),
+      });
+      if (r.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", message: "", company: "" });
+      } else {
+        setStatus("error");
+      }
     } catch {
       setStatus("error");
     }
@@ -34,6 +48,18 @@ const ContactForm: React.FC = () => {
       </div>
 
       <form className="contact-form" onSubmit={handleSubmit} noValidate>
+        {/* Honeypot — keep in DOM but off-screen */}
+        <input
+          type="text"
+          name="company"
+          value={formData.company}
+          onChange={handleChange}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, width: 0 }}
+        />
+
         <div className="form-row">
           <div className="form-group">
             <label htmlFor={nameId}>Name</label>
@@ -46,6 +72,8 @@ const ContactForm: React.FC = () => {
               placeholder="Your full name"
               required
               autoComplete="name"
+              minLength={2}
+              maxLength={80}
             />
           </div>
 
@@ -60,6 +88,7 @@ const ContactForm: React.FC = () => {
               placeholder="you@example.com"
               required
               autoComplete="email"
+              maxLength={120}
             />
           </div>
         </div>
@@ -74,10 +103,14 @@ const ContactForm: React.FC = () => {
             onChange={handleChange}
             placeholder="Write your message here..."
             required
+            minLength={10}
+            maxLength={5000}
           />
         </div>
 
-        <button type="submit" className="btn-submit">Send Message</button>
+        <button type="submit" className="btn-submit" disabled={status==="sending"}>
+          {status === "sending" ? "Sending…" : "Send Message"}
+        </button>
 
         <p
           role="status"
