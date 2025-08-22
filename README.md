@@ -1,69 +1,54 @@
-# React + TypeScript + Vite
+Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, interactive portfolio website built with React + TypeScript, designed with a Futuristic Neon UI theme.
+This project showcases my skills, projects, and contact information in a responsive, accessible, and animated layout.
 
-Currently, two official plugins are available:
+✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🎨 Futuristic Neon Theme with theme switcher (Dark Neon + Light Minimal).
 
-## Expanding the ESLint configuration
+⚡ Component-based structure:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Navbar – Smooth scroll navigation with theme toggle.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Intro – Hero section with call-to-actions.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+AboutMe – Short personal overview.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Projects – Showcase of projects with images, hover effects, and filters.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+ContactForm – Responsive form with email integration.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+📱 Fully responsive design for all screen sizes.
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+♿ Accessibility-focused (ARIA roles, keyboard navigation, theme contrast).
+
+🔗 Integrated with Resend API for sending contact form emails.
+
+🛠️ Tech Stack
+
+Frontend: React (TypeScript), SCSS (no Tailwind), Font Awesome Icons.
+
+Styling: Neon dark blue theme with custom animations.
+
+Deployment: Vercel.
+
+
+
+🚀 Getting Started
+1. Clone the Repository
+git clone https://github.com/your-username/portfolio.git
+cd portfolio
+
+2. Install Dependencies
+npm install
+
+3. Start Development Server
+npm run dev
+
+
+Open http://localhost:5173
+ in your browser.
+
+4. Build for Production
+npm run build
