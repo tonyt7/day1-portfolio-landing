@@ -1,5 +1,5 @@
-Portfolio Website
-
+**Portfolio Website
+**
 A modern, interactive portfolio website built with React + TypeScript, designed with a Futuristic Neon UI theme.
 This project showcases my skills, projects, and contact information in a responsive, accessible, and animated layout.
 
