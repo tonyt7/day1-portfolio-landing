@@ -31,7 +31,7 @@ export const sampleProjects: Project[] = [
     image: MathPlan,
     status:"ongoing",
     links: [
-            { type: "github", url: "https://github.com/yourname/mathpath" },
+            { type: "github", url: "https://github.com/tonyt7/Adaptive-Math-Tutor" },
     ],
     year: 2025,
   },
