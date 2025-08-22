@@ -15,7 +15,7 @@ export const sampleProjects: Project[] = [
     image: SmartCityImage,
     status:"completed",
     links: [
-      { type: "live", url: "https://smart-city-project.com/" },
+      { type: "live", url: "https://smart-city-project.com" },
       { type: "github", url: "https://github.com/tonyt7/Smart_City_Community_Portal" },
       { type: "caseStudy", url: "https://1drv.ms/b/c/b4df617c42287b7f/EexA6WokiTlDlQcg9WQPMUgB9A4m9BVF7n-06r7ESgGZEw?e=SO1Euu" },
     ],
@@ -71,7 +71,7 @@ export const sampleProjects: Project[] = [
     image: WebInter,
     status:"completed",
     links: [
-      { type: "caseStudy", url: "https://example.com/kerala" },
+      { type: "caseStudy", url: "https://1drv.ms/w/c/b4df617c42287b7f/EX97KEJ8Yd8ggLTsFgAAAAAB_d28Zm3OzYUAFq3Iu0sNog?e=XNAziX" },
       { type: "github", url: "https://github.com/tonyt7/Website-Internationalisation-Project" },
     ],
     year: 2024,
