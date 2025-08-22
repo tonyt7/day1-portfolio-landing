@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
 
       <div className="footer-links">
         <a
-          href="https://github.com/yourgithub"
+          href="https://github.com/tonyt7"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
@@ -20,14 +20,14 @@ const Footer: React.FC = () => {
           <FontAwesomeIcon icon={faGithub} />
         </a>
         <a
-          href="https://linkedin.com/in/yourlinkedin"
+          href="https://www.linkedin.com/in/tony-tomy-83bb15275/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn"
         >
           <FontAwesomeIcon icon={faLinkedin} />
         </a>
-        <a href="mailto:your@email.com" aria-label="Email">
+        <a href="mailto:tonytomy389@gmail.com" aria-label="Email">
           <FontAwesomeIcon icon={faEnvelope} />
         </a>
       </div>

@@ -8,42 +8,42 @@ const STOPS: Stop[] = [
     year: "2018–2020",
     title: "A‑Levels",
     detail:
-      "First steps into programming with C++. Learned fundamentals and problem‑solving.",
+      "First steps into programming with C++ as the programming language. Learned fundamentals and problem‑solving.",
   },
   {
     id: 2,
     year: "2020–2021",
     title: "Year 1 — Web Programming",
     detail:
-      "HTML, CSS, JavaScript, PHP, MySQL. Built responsive sites and small full‑stack demos.",
+      "Used HTML, CSS, JavaScript, PHP, MySQL and built first website as part of the coursework ",
   },
   {
     id: 3,
     year: "2021–2022",
     title: "Year 2 — Group Project",
     detail:
-      "Team project using Express.js, Node.js, GitHub, GCP. Focused on collaboration & delivery.",
+      "Team project using Express.js, Node.js, GitHub, GCP to build a helpdesk system. Focused on collaboration & delivery.",
   },
   {
     id: 4,
     year: "2022–2023",
     title: "Year 3 — Bachelor’s Project",
     detail:
-      "Built with Laravel + Bootstrap + MySQL. Emphasis on data modelling and UX polish.",
+      "Developed a multilingual website using PHP, JavaScript, MySQL, HTML, and CSS, with automatic language detection and smooth UX-focused redirection based on user region.",
   },
   {
     id: 5,
     year: "2023–2024",
-    title: "Placement — Council",
+    title: "Placement — Leicestershire County Council",
     detail:
-      "Worked with Drupal CMS and Tailwind. Accessibility, content workflows, production rollouts.Lorem Ipsum Lorem Ipsum Lorem Ipsum",
+      "Worked with Drupal CMS and Tailwind.  Focussed mainly on Accessibility standards, content workflows and production rollouts.",
   },
   {
     id: 6,
     year: "2024–2025",
     title: "Year 5 — Master’s Thesis",
     detail:
-      "React, Node.js, Express.js, MySQL. Integrated Master’s (MSci) completed July 2025.",
+      "Smart City Community Portal — a MERN + MySQL web platform featuring crowdsourced issue reporting, idea submission with voting thresholds, forums with moderation, and an admin dashboard for real-time decision-making. Built using React, Node.js, Express.js, and MySQL as part of my Integrated Master’s (MSci), completed July 2025.",
   },
 
   
@@ -51,7 +51,7 @@ const STOPS: Stop[] = [
     year: "2025–", 
     title: "Web Full-Stack Upskilling (Self-taught)",
     detail: 
-    "Focused deep-dive: TypeScript, React Router, Zustand, Prisma, testing (Vitest/Playwright), Docker, CI/CD, cloud basics (Vercel/Fly/Render), and patterns for scalable Node/Express APIs."
+    "Focused deep-dive: TypeScript, React Router, Vue.js, Next.js, Laravel, GraphQL, Prisma, testing (Vitest/Playwright), Docker, CI/CD, cloud basics (Vercel/Fly/Render), and patterns for scalable Node/Express APIs."
  },
 ];
 

@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import "./ProjectGallery.css";
 
+
 export type ProjectLink = {
   type: "live" | "github" | "caseStudy" | "demo";
   url: string;
@@ -12,6 +13,7 @@ export type Project = {
   summary: string;
   stacks: string[]; // ["React", "TypeScript", "Node", ...]
   image?: string; // cover image (optional)
+  status?: "ongoing" | "completed" | "paused";
   links: ProjectLink[];
   year?: number;
   featured?: boolean;
@@ -41,7 +43,10 @@ const uniqueStacks = (items: Project[]) =>
     .sort((a, b) => a.localeCompare(b));
 
 const ProjectCard: React.FC<{ p: Project; layout: "grid" | "list" }> = ({ p, layout }) => (
-  <article className={`proj-card ${layout === "list" ? "list" : ""}`}>
+  <article className={`proj-card ${layout === "list" ? "list" : ""} ${p.status === "ongoing" ? "is-ongoing" : ""}`} id="projects">
+    {p.status === "ongoing" && (
+      <span className="proj-flag" aria-label="Project status: ongoing">Ongoing</span>
+    )}
     <div className="media">
       {p.image ? (
         <img src={p.image} alt="" loading="lazy" />

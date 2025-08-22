@@ -85,6 +85,41 @@
   border-color: color-mix(in oklab, var(--pg-accent) 40%, var(--pg-card-border));
   box-shadow: 0 10px 30px rgba(0,0,0,.25), 0 0 24px rgba(0,255,213,.06);
 }
+/* The little pill */
+.proj-flag{
+  position: absolute;
+  top: 10px; left: 10px;
+  z-index: 2;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  line-height: 1;
+  color: #fff;                              /* dark theme text */
+  background: color-mix(in oklab, var(--pg-accent) 30%, #000);
+  border: 1px solid color-mix(in oklab, var(--pg-accent) 60%, var(--pg-card-border));
+  box-shadow: 0 2px 10px rgba(0,0,0,.35);
+  pointer-events: none;                     /* won’t block clicks below */
+}
+
+/* Light theme variant */
+[data-theme="light"] .proj-flag{
+  color: #0b1220;
+  background: color-mix(in oklab, var(--pg-accent) 20%, #fff);
+  border-color: color-mix(in oklab, var(--pg-accent) 45%, #ccd);
+}
+
+/* Optional: subtle top stripe for ongoing cards */
+.is-ongoing::before{
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--pg-accent), transparent);
+  opacity: .8;
+  pointer-events: none;
+}
 
 /* Media */
 .proj-card .media { grid-area: media; aspect-ratio: 16/9; background: #0f1130; }

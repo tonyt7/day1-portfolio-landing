@@ -204,7 +204,7 @@ background:#fff;
   border: 2px solid var(--head);
   background: var(--glassBg);
   width: 14%;
-  max-width: 45%;            /* keep some breathing room */
+            /* keep some breathing room */
  // margin: 0 auto;
   overflow: hidden;   
   box-sizing: border-box;

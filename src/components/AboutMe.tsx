@@ -7,7 +7,7 @@ import profileLight from "../assets/Aboutme-light.png";
 export default function AboutFlipCard() {
   // even distribution along the curve (tweak if you want different spacing)
     return (
-    <section className="flip-wrap">
+    <section className="flip-wrap" id="about">
       <motion.div
   className={`flip-scene `}
   initial={false}
@@ -29,17 +29,11 @@ export default function AboutFlipCard() {
     <div className="front-center">
       <h2 className="title-cyan about-title">About Me</h2>
       <p className="statement">
-        Creative and adaptable web developer with a strong academic foundation in
-        Computer Science (MSci, Loughborough University) and practical experience
-        across the full stack. Proven ability to build responsive websites,
-        develop backend logic, and manage accessibility and content workflows.
-        Proficient in HTML5, CSS/SCSS, JavaScript (including modern frameworks),
-        PHP, Node.js, and MySQL. Previously contributed to public-facing
-        microsites and internal systems at Leicestershire County Council and
-        actively participated in building user-centred applications through
-        university-led projects, and looking to bring collaborative
-        problem-solving, innovation, and continuous improvement to a
-        forward-thinking development team
+        Hi, I’m a creative and adaptable web developer with a strong academic foundation in Computer Science (MSci, Loughborough University). Over the years, I’ve worked across the full stack — from building responsive websites to developing backend logic and streamlining accessibility and content workflows.
+
+I enjoy working with HTML5, CSS/SCSS, JavaScript (and modern frameworks), PHP, Node.js, and MySQL, and I’ve had hands-on experience with both public-facing microsites and internal systems during my time at Leicestershire County Council. Alongside that, I’ve collaborated on user-centred applications through university projects, where teamwork and problem-solving were key.
+
+I’m now looking to bring that same mix of collaboration, innovation, and continuous improvement to a forward-thinking development team.
       </p>
     </div>
 

@@ -5,6 +5,20 @@ import bwAvatar from "../assets/AvatarimageWhite.png"
 import "./Hero.css";
 
 const Hero = () => {
+
+
+    const handleProjectClick = () => {
+    // scroll to the contact form section
+    const el = document.getElementById("contact");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleResumeClick = () => {
+    // open your OneDrive resume link in a new tab
+    window.open("https://onedrive.live.com/personal/b4df617c42287b7f/_layouts/15/doc.aspx?resid=c1e69916-8131-4e17-a2ff-7d63fd213d91&cid=b4df617c42287b7f", "_blank");
+  };
   const typedEl = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
@@ -19,15 +33,19 @@ const Hero = () => {
   }, []);
 
   return (
-  <div className="hero">
+  <div className="hero" id="intro">
     <div className="hero-left">
       <p>Hello,</p>
       <h1>I'm Tony</h1>
       <h2><span ref={typedEl} className="typed-text" /></h2>
       <div className="hero-buttons">
-        <button className="hero-button">Got a project?</button>
-        <button className="hero-button">My Resume</button>
-      </div>
+        <button className="hero-button" onClick={handleProjectClick}>
+            Got a project?
+          </button>
+          <button className="hero-button" onClick={handleResumeClick}>
+            My Resume
+          </button>
+          </div>
     </div>
 
     <div className="hero-right">
